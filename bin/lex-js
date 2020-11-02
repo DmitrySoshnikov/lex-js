@@ -1,0 +1,91 @@
+#!/usr/bin/env node
+
+/**
+ * The MIT License (MIT)
+ * Copyright (C) 2020-present Dmitry Soshnikov <dmitry.soshnikov@gmail.com>
+ */
+
+'use strict';
+
+const fs = require('fs');
+
+const ARGS = {
+  '--spec': '-s',
+  '--output': '-o',
+  '--help': '-h',
+};
+
+/**
+ * Reads the lexer spec from a file, and generates
+ * a tokenizer module.
+ */
+function main() {
+  if (hasArg('--help')) {
+    help();
+    return;
+  }
+
+  const specFile = getExpectedArg('--spec');
+  const outputFile = getExpectedArg('--output');
+
+  const specContent = fs.readFileSync(specFile, 'utf-8');
+
+  const tokenizerContent = fs
+    .readFileSync(__dirname + '/../src/Tokenizer.js', 'utf-8')
+    .replace('/* INJECT: %spec */', `const SPEC = ${specContent};`)
+    .replace('.exports = Tokenizer', '.exports = Tokenizer.fromSpec(SPEC)');
+
+  fs.writeFileSync(outputFile, tokenizerContent);
+  informSuccess(outputFile);
+}
+
+function help() {
+  console.info(
+    `
+${bold('Usage:')} lex-js [options]
+
+Options:
+  -s FILE, --spec FILE    Filepath to lexer spec
+  -o FILE, --output FILE  Output file for generated lexer
+`,
+  );
+}
+
+function bold(value) {
+  return `\x1b[1m${value}\x1b[0m`;
+}
+
+function green(value) {
+  return `\x1b[32m${value}\x1b[0m`;
+}
+
+function informSuccess(filePath) {
+  console.info(`\n${green('\u2713 Successfully generated:')} ${filePath}\n`);
+}
+
+function hasArg(name) {
+  return getArgIndex(name) !== -1;
+}
+
+function getArgIndex(name) {
+  let index = process.argv.indexOf(name);
+
+  if (index === -1 && ARGS[name] != null) {
+    index = process.argv.indexOf(ARGS[name]);
+  }
+
+  return index;
+}
+
+function getExpectedArg(name) {
+  const index = getArgIndex(name);
+
+  if (index === -1) {
+    console.info(`The ${bold(name)} argument is required.`);
+    process.exit(1);
+  }
+
+  return process.argv[getArgIndex(name) + 1];
+}
+
+main();

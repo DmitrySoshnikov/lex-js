@@ -1,0 +1,35 @@
+{
+  "name": "lex-js",
+  "version": "0.1.1",
+  "description": "Lexer generator from RegExp spec",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DmitrySoshnikov/lex-js.git"
+  },
+  "bugs": "https://github.com/DmitrySoshnikov/lex-js/issues",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "prepublish": "npm test",
+    "eslint": "eslint src/ && eslint bin/lex-js"
+  },
+  "bin": {
+    "lex-js": "./bin/lex-js"
+  },
+  "keywords": [
+    "Lexer",
+    "Tokenizer",
+    "RegExp",
+    "Parser",
+    "Token",
+    "Scanner",
+    "JavaScript"
+  ],
+  "author": "Dmitry Soshnikov",
+  "license": "MIT",
+  "devDependencies": {
+    "jest-cli": "^26.6.1",
+    "eslint": "^7.12.1",
+    "prettier": "^2.1.2"
+  }
+}
