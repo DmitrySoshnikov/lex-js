@@ -33,20 +33,21 @@ class Tokenizer {
   /**
    * Creates new
    */
-  constructor(spec, string = null) {
+  constructor(spec, options = {}, string = null) {
     this._spec = this._processSpec(spec);
     this._tokens = [];
-    this.init(string);
+    this.init(string, options);
   }
 
   /**
    * Initializes a string.
    */
-  init(string) {
+  init(string, options = {}) {
     this._string = string;
     this._cursor = 0;
 
     this._tokens.length = 0;
+    this.setOptions(options);
 
     this._currentLine = 1;
     this._currentColumn = 0;
@@ -78,6 +79,20 @@ class Tokenizer {
    */
   reset() {
     return this.init(this._string);
+  }
+
+  /**
+   * Sets parsing options.
+   */
+  setOptions(options) {
+    this._options = Object.assign(this._options || {}, options);
+  }
+
+  /**
+   * Returns options.
+   */
+  getOptions() {
+    return this._options;
   }
 
   /**
@@ -246,19 +261,25 @@ class Tokenizer {
    * Creates token object.
    */
   _toToken(tokenType, tokenValue = '') {
-    return {
+    const token = {
       // Basic data.
       type: tokenType,
       value: tokenValue,
-
-      // Location data.
-      startOffset: this._tokenStartOffset,
-      endOffset: this._tokenEndOffset,
-      startLine: this._tokenStartLine,
-      endLine: this._tokenEndLine,
-      startColumn: this._tokenStartColumn,
-      endColumn: this._tokenEndColumn,
     };
+
+    if (this._options.captureLocations) {
+      Object.assign(token, {
+        // Location data.
+        startOffset: this._tokenStartOffset,
+        endOffset: this._tokenEndOffset,
+        startLine: this._tokenStartLine,
+        endLine: this._tokenEndLine,
+        startColumn: this._tokenStartColumn,
+        endColumn: this._tokenEndColumn,
+      });
+    }
+
+    return token;
   }
 
   /**
@@ -279,6 +300,10 @@ class Tokenizer {
    * Processes lexical rules with begin marker.
    */
   _processSpec(spec) {
+    if (spec.options) {
+      this.setOptions(spec.options);
+    }
+
     if (spec.rules) {
       spec = spec.rules;
     }

@@ -8,6 +8,7 @@
 'use strict';
 
 const fs = require('fs');
+const lexParser = require('../generated/lex-parser.gen');
 
 const ARGS = {
   '--spec': '-s',
@@ -28,7 +29,13 @@ function main() {
   const specFile = getExpectedArg('--spec');
   const outputFile = getExpectedArg('--output');
 
-  const specContent = fs.readFileSync(specFile, 'utf-8');
+  let specContent = fs.readFileSync(specFile, 'utf-8');
+
+  try {
+    specContent = JSON.stringify(lexParser.parse(specContent), null, 2);
+  } catch (_e) {
+    // Skip Lex parsing error, fallback to default.
+  }
 
   const tokenizerContent = fs
     .readFileSync(__dirname + '/../src/Tokenizer.js', 'utf-8')

@@ -23,6 +23,8 @@ describe('Toknizer-API', () => {
       'init',
       'initString',
       'reset',
+      'setOptions',
+      'getOptions',
       'getNextToken',
       'hasMoreTokens',
       'isEOF',
