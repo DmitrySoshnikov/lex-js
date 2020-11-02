@@ -284,8 +284,19 @@ class Tokenizer {
     }
 
     for (const entry of spec) {
+      // If matcher is a string.
+      if (typeof entry[0] === 'string') {
+        entry[0] = new RegExp(entry[0]);
+      }
+
+      // Match from the beginning.
       if (entry[0].source[0] !== '^') {
         entry[0] = new RegExp(`^${entry[0].source}`);
+      }
+
+      // If handler is provided as a string.
+      if (typeof entry[1] === 'string') {
+        entry[1] = Function('yytext', entry[1]);
       }
     }
 
