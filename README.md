@@ -166,7 +166,9 @@ Initializes the tokenizer instance with a string and parsing options:
 
 ```js
 tokenizer.init('Score 255', {captureLocations: true});
-````
+```
+
+Note: `initString` is an alias for `init` for compatibility with tokenizer API from [Syntax](https://github.com/DmitrySoshnikov/syntax#using-custom-tokenizer) tool.
 
 #### reset
 
@@ -247,7 +249,6 @@ Result:
 }
 
 */
-
 ```
 
 The options can also be passed with each `init` call:
@@ -264,7 +265,6 @@ Result:
 {type: 'WORD', value: 'Score'}
 
 */
-
 ```
 
 ### Error reporting
@@ -316,7 +316,7 @@ This format can be shorter and contain only rules:
   [/\s+/, v => 'WS'],
   [/\d+/, v => 'NUMBER'],
   [/\w+/, v => 'WORD'],
-]
+];
 ```
 
 The advantages of this format are the RegExp rules are passed actual regular expressions, and the handlers as actual functions, controlling the parameter name `v` for the matching token.
