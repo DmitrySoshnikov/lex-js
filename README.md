@@ -188,7 +188,7 @@ Returns the next token from the iterator.
 
 #### tokens
 
-**`tokenizer.token()`**
+**`tokenizer.tokens()`**
 
 Returns tokens iterator.
 
