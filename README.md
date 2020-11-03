@@ -56,7 +56,7 @@ npm test
 The module allows creating tokenizers from RegExp specs at runtime:
 
 ```js
-const {Tokenizer} = require('lex-js');
+const {Tokenizer} = require('@dmitrysoshnikov/lex-js');
 
 /**
  * Create a new tokenizer from spec.
@@ -142,7 +142,7 @@ The following methods are available on the `Tokenizer` class.
 Creates a new tokenizer from spec:
 
 ```js
-const {Tokenizer} = require('lex-js');
+const {Tokenizer} = require('@dmitrysoshnikov/lex-js');
 
 /**
  * Create a new tokenizer from spec.
