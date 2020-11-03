@@ -2,15 +2,14 @@
 
 [![Build Status](https://travis-ci.org/DmitrySoshnikov/lex-js.svg?branch=master)](https://travis-ci.org/DmitrySoshnikov/lex-js) [![npm version](https://badge.fury.io/js/lex-js.svg)](https://badge.fury.io/js/lex-js) [![npm downloads](https://img.shields.io/npm/dt/lex-js.svg)](https://www.npmjs.com/package/lex-js)
 
-
 Lexer generator from RegExp spec.
 
 ### Table of Contents
 
 - [Installation](#installation)
 - [Development](#development)
-- [CLI usage example](#cli-usage-example)
 - [Node usage example](#node-usage-example)
+- [CLI usage example](#cli-usage-example)
 - [API](#api)
   - [fromSpec](#fromSpec)
   - [init](#init)
@@ -43,7 +42,6 @@ lex-js --help
 3. Make sure `npm test` passes (add new tests if needed)
 4. Submit a PR
 
-
 ```
 git clone https://github.com/<your-github-account>/lex-js.git
 cd lex-js
@@ -53,13 +51,46 @@ npm test
 ./bin/lex-js --help
 ```
 
+### Node usage example
+
+The module allows creating tokenizers from RegExp specs at runtime:
+
+```js
+const {Tokenizer} = require('lex-js');
+
+/**
+ * Create a new tokenizer from spec.
+ */
+const tokenizer = Tokenizer.fromSpec([
+  [/\s+/, v => 'WS'],
+  [/\d+/, v => 'NUMBER'],
+  [/\w+/, v => 'WORD'],
+]);
+
+tokenizer.init('Score 255');
+
+console.log(tokenizer.getAllTokens());
+
+/*
+
+Result:
+
+[
+  {type: 'WORD', value: 'Score'},
+  {type: 'WS', value: ' '},
+  {type: 'NUMBER', value: '255'},
+]
+
+*/
+```
+
 ### CLI usage example
 
 The CLI allows generating a tokenizer module from the spec file.
 
 Example `~/spec.lex`:
 
-```
+```js
 {
   rules: [
     [/\s+/, v => 'WS'],
@@ -88,39 +119,6 @@ const lexer = require('./lexer');
 lexer.init('Score 250');
 
 console.log(lexer.getAllTokens());
-
-/*
-
-Result:
-
-[
-  {type: 'WORD', value: 'Score'},
-  {type: 'WS', value: ' '},
-  {type: 'NUMBER', value: '255'},
-]
-
-*/
-```
-
-### Node usage example
-
-It is possible to generate a tokenizer from a spec at runtime:
-
-```js
-const {Tokenizer} = require('lex-js');
-
-/**
- * Create a new tokenizer from spec.
- */
-const tokenizer = Tokenizer.fromSpec([
-  [/\s+/, v => 'WS'],
-  [/\d+/, v => 'NUMBER'],
-  [/\w+/, v => 'WORD'],
-]);
-
-tokenizer.init('Score 255');
-
-console.log(tokenizer.getAllTokens());
 
 /*
 
