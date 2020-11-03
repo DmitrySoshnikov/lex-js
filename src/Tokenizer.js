@@ -106,7 +106,9 @@ class Tokenizer {
    * Returns next token.
    */
   getNextToken() {
-    return this._gen.next().value;
+    const token = this._gen.next().value;
+    this._tokens.push(token);
+    return token;
   }
 
   /**
@@ -200,11 +202,18 @@ class Tokenizer {
   }
 
   /**
+   * Returns currently extracted tokens.
+   */
+  getCurrentTokens() {
+    return this._tokens;
+  }
+
+  /**
    * Returns all tokens as an array.
    */
   getAllTokens() {
-    if (this._tokens == null) {
-      this._tokens = [...this];
+    if (this.hasMoreTokens()) {
+      this._tokens.push(...this.tokens());
     }
     return this._tokens;
   }
