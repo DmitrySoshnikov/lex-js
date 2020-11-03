@@ -1,6 +1,6 @@
 # lex-js
 
-[![Build Status](https://travis-ci.org/DmitrySoshnikov/lex-js.svg?branch=master)](https://travis-ci.org/DmitrySoshnikov/lex-js)
+[![Build Status](https://api.travis-ci.org/DmitrySoshnikov/lex-js.svg)](https://travis-ci.org/DmitrySoshnikov/lex-js)
 
 Lexer generator from RegExp spec.
 
@@ -27,7 +27,7 @@ Lexer generator from RegExp spec.
 
 ### Installation
 
-The tool can be installed as an [npm module](https://www.npmjs.com/package/lex-js):
+The tool can be installed as an [npm module](https://www.npmjs.com/package/@dmitrysoshnikov/lex-js):
 
 ```
 npm install -g @dmitrysoshnikov/lex-js
