@@ -1,5 +1,7 @@
 /examples/
 .gitignore
+.prettierrc
+.eslintrc.json
 .eslintrc
 .babelrc
 .travis.yml
