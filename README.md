@@ -205,7 +205,7 @@ tokenizer.getAllTokens();
 
 // Iterate through tokens:
 
-for (const token of tokenizer.tokens() {
+for (const token of tokenizer.tokens()) {
   // Pull lazily tokens
 }
 ```
