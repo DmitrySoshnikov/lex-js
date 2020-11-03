@@ -106,7 +106,7 @@ Example `~/spec.lex`:
 To generate the tokenizer module:
 
 ```
-./bin/lex-js --spec ~/spec.lex --output ./lexer.js
+lex-js --spec ~/spec.lex --output ./lexer.js
 
 ✓ Successfully generated: ~/lexer.js
 ```
