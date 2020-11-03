@@ -1,6 +1,6 @@
 # lex-js
 
-[![Build Status](https://travis-ci.org/DmitrySoshnikov/lex-js.svg?branch=master)](https://travis-ci.org/DmitrySoshnikov/lex-js) [![npm version](https://badge.fury.io/js/@dmitrysoshnikov/lex-js.svg)](https://badge.fury.io/js/lex-js) [![npm downloads](https://img.shields.io/npm/dt/lex-js.svg)](https://www.npmjs.com/package/@dmitrysoshnikov/lex-js)
+[![Build Status](https://travis-ci.org/DmitrySoshnikov/lex-js.svg?branch=master)](https://travis-ci.org/DmitrySoshnikov/lex-js) [![npm version](https://badge.fury.io/js/@dmitrysoshnikov/lex-js.svg)](https://badge.fury.io/js/@dmitrysoshnikov/lex-js) [![npm downloads](https://img.shields.io/npm/dt/@dmitrysoshnikov/lex-js.svg)](https://www.npmjs.com/package/@dmitrysoshnikov/lex-js)
 
 Lexer generator from RegExp spec.
 
