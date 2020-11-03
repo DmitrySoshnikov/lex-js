@@ -107,7 +107,9 @@ class Tokenizer {
    */
   getNextToken() {
     const token = this._gen.next().value;
-    this._tokens.push(token);
+    if (token != null) {
+      this._tokens.push(token);
+    }
     return token;
   }
 
